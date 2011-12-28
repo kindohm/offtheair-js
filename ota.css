@@ -1,0 +1,38 @@
+/* 700 x 550 */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    width: 700px;
+    height: 550px;
+    position: absolute;
+    background: transparent;
+}
+
+#controlOverlay {
+    position: absolute;
+}
+
+#osc1HzSlider, #osc2HzSlider, #lfo1HzSlider, #lfo2HzSlider {
+    position: absolute;
+    height: 350px;
+}
+
+#osc1HzSlider {
+    left: 40px;
+}
+
+#lfo1HzSlider {
+    left: 100px;
+}
+
+#osc2HzSlider {
+    left: 200px;
+}
+
+#lfo2HzSlider {
+    left: 100px;
+}
