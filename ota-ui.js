@@ -1,5 +1,6 @@
 var audioDevice, oscillator1, oscillator2, lfo1, lfo2, playing;
 var channelCount = 2;
+var chorus;
 
 $(document).ready(function () {
     updateCenter();
@@ -27,6 +28,7 @@ function setUpSliders() {
         max: 1000,
         value: 440,
         change: function (event, ui) { oscillator1.frequency = ui.value; }
+	, slide: function(event, ui) { oscillator1.frequency = ui.value; }
     });
 
     $('#lfo1HzSlider').slider({
@@ -34,7 +36,9 @@ function setUpSliders() {
         min: 0,
         max: 1000,
         value: 2,
-        change: function (event, ui) { lfo1.frequency = ui.value; }
+        change: function (event, ui) { lfo1.frequency = ui.value; },
+	slide: function(event, ui) { lfo1.frequency = ui.value; },
+	step: .5
     });
 
     $('#osc2HzSlider').slider({
@@ -65,17 +69,26 @@ function updateCenter() {
 function buildAudio() {
     audioDevice = audioLib.AudioDevice(audioCallback, channelCount);
     oscillator1 = audioLib.Oscillator(audioDevice.sampleRate, $('#osc1HzSlider').slider('value'));
-    oscillator2 = audioLib.Oscillator(audioDevice.sampleRate, $('#osc2HzSlider').slider('value'));
+    oscillator1.waveShape = 'square';
+    //oscillator2 = audioLib.Oscillator(audioDevice.sampleRate, $('#osc2HzSlider').slider('value'));
     lfo1 = audioLib.Oscillator(audioDevice.sampleRate, 1);
-    lfo2 = audioLib.Oscillator(audioDevice.sampleRate, 2);
+    //lfo2 = audioLib.Oscillator(audioDevice.sampleRate, 2);
 
     oscillator1.addAutomation('frequency', lfo1, .25, 'additiveModulation');
-    oscillator2.addAutomation('frequency', lfo2, .55, 'additiveModulation');
+    //oscillator2.addAutomation('frequency', lfo2, .55, 'additiveModulation');
+
+	chorus = audioLib.BitCrusher(audioDevice.sampleRate, 1);
 }
 
 function audioCallback(buffer, channelCount) {
     var l = buffer.length, current;
     
+    lfo1.generateBuffer(l, channelCount);
+    oscillator1.append(buffer, channelCount);
+	chorus.append(buffer);
+
+
+    /*
     for (current = 0; current < l; current += channelCount) {
         lfo1.generate();
         lfo2.generate();
@@ -84,4 +97,6 @@ function audioCallback(buffer, channelCount) {
         buffer[current] = oscillator1.getMix();
         buffer[current + 1] = oscillator2.getMix();
     }
+    */
+
 }
