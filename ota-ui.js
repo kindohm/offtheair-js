@@ -34,11 +34,11 @@ function setUpSliders() {
     $('#lfo1HzSlider').slider({
         orientation: 'vertical',
         min: 0,
-        max: 1000,
+        max: 100,
         value: 2,
-        change: function (event, ui) { lfo1.frequency = ui.value; },
+        change: function (event, ui) { lfo1.frequency = ui.value; $('#v').text(ui.value); },
 	slide: function(event, ui) { lfo1.frequency = ui.value; },
-	step: .5
+	step: .1
     });
 
     $('#osc2HzSlider').slider({
@@ -69,12 +69,12 @@ function updateCenter() {
 function buildAudio() {
     audioDevice = audioLib.AudioDevice(audioCallback, channelCount);
     oscillator1 = audioLib.Oscillator(audioDevice.sampleRate, $('#osc1HzSlider').slider('value'));
-    oscillator1.waveShape = 'square';
+    oscillator1.waveShape = 'sine';
     //oscillator2 = audioLib.Oscillator(audioDevice.sampleRate, $('#osc2HzSlider').slider('value'));
     lfo1 = audioLib.Oscillator(audioDevice.sampleRate, 1);
     //lfo2 = audioLib.Oscillator(audioDevice.sampleRate, 2);
 
-    oscillator1.addAutomation('frequency', lfo1, .25, 'additiveModulation');
+    oscillator1.addAutomation('frequency', lfo1, .9, 'additiveModulation');
     //oscillator2.addAutomation('frequency', lfo2, .55, 'additiveModulation');
 
 	chorus = audioLib.BitCrusher(audioDevice.sampleRate, 1);
@@ -85,7 +85,6 @@ function audioCallback(buffer, channelCount) {
     
     lfo1.generateBuffer(l, channelCount);
     oscillator1.append(buffer, channelCount);
-	chorus.append(buffer);
 
 
     /*
