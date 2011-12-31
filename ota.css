@@ -13,12 +13,51 @@ body {
 }
 
 #controlOverlay {
-    position: absolute;
+	background: transparent;
+    width: 100%;
+    height: 100%;
 }
 
-#osc1HzSlider, #osc2HzSlider, #lfo1HzSlider, #lfo2HzSlider {
+#osc1HzLabel, #lfo1HzLabel, #lfo1AmountLabel , #osc2HzLabel, #lfo2HzLabel, #lfo2AmountLabel, #volumeLabel{
+	position: absolute;
+	top: 20px;
+	font-family: Helvetica, Arial, Sans-Serif;
+	font-size: 10pt;
+}
+#osc1HzLabel{
+	left: 10px;
+}
+
+#lfo1HzLabel{
+	left: 120px;
+}
+
+#lfo1AmountLabel{
+	left: 210px;
+}
+
+#osc2HzLabel{
+	left: 320px;
+}
+
+#lfo2HzLabel{
+	left: 420px;
+}
+
+#lfo2AmountLabel{
+	left: 510px;
+}
+
+#volumeLabel{
+	left: 625px;
+}
+
+
+
+#osc1HzSlider, #osc2HzSlider, #lfo1HzSlider, #lfo2HzSlider, #lfo1AmountSlider, #lfo2AmountSlider, #volumeSlider {
     position: absolute;
-    height: 350px;
+    height: 330px;
+    top: 50px;
 }
 
 #osc1HzSlider {
@@ -26,13 +65,45 @@ body {
 }
 
 #lfo1HzSlider {
-    left: 100px;
+    left: 150px;
 }
 
+#lfo1AmountSlider{
+	left: 240px;
+}	
+
 #osc2HzSlider {
-    left: 200px;
+    left: 340px;
 }
 
 #lfo2HzSlider {
-    left: 100px;
+    left: 440px;
 }
+
+#lfo2AmountSlider {
+	left: 540px;
+}
+
+#volumeSlider{
+	left: 640px;
+}
+
+#waveFormButton{
+	position: absolute;
+	left: 18px;
+	top: 480px;
+	width: 80px;
+	height: 30px;
+}
+
+#remarks{
+	font-family: Helvetica, Arial, Sans-Serif;
+	color: #ccc;
+	position: absolute;
+	right: 0px;
+	bottom: 43px;
+	height: 30px;
+	width: 320px;
+	font-size: 9pt;
+}
+
