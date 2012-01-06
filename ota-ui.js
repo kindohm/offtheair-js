@@ -12,15 +12,23 @@ var lfo2WaveForm = 'sine';
 var volume = .5;
 
 $(document).ready(function () {
-    loadInitialParams();
-    updateCenter();
-    $(window).resize(function () { updateCenter(); });
-    hideControls();
-    $('#container').mouseenter(function () { showControls(); });
-    $('#container').mouseleave(function () { hideControls(); });
-    initControls();
-    buildAudio();
-    setShareUrl();
+
+    if ($.browser.msie) {
+        $('#container').empty();
+        $('#container').html('<p>This app will only run in webkit or mozilla browsers (Safari, Chrome, or FireFox).</p>');
+    }
+    else {
+
+        loadInitialParams();
+        updateCenter();
+        $(window).resize(function () { updateCenter(); });
+        hideControls();
+        $('#container').mouseenter(function () { showControls(); });
+        $('#container').mouseleave(function () { hideControls(); });
+        initControls();
+        buildAudio();
+        setShareUrl();
+    }
 });
 
 function loadInitialParams() {
