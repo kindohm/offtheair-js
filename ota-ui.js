@@ -190,7 +190,7 @@ function getNextWaveShape(shape) {
 }
 
 function updateCenter() {
-    var doc = $(document);
+    var doc = $(window);
     var content = $('#container');
     var top = doc.height() / 2.0 - content.height() / 2.0;
     var left = doc.width() / 2.0 - content.width() / 2.0;
