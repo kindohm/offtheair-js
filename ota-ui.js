@@ -67,8 +67,6 @@ function buildShareUrl() {
         '&lfo2WaveForm=' + lfo2.waveShape +
         '&oscWaveForm=' + oscillator1.waveShape +
         '&volume=' + $('#volumeSlider').slider('option', 'value');
-
-
 }
 
 function setShareUrl() {
